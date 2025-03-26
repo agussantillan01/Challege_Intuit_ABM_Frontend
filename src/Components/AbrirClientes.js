@@ -15,15 +15,19 @@ const AbrirClientes = () => {
     const [telefono, setTelefono] = useState('');
     const [email, setEmail] = useState('');
     const [titulo, setTitulo] = useState('');
+
+    const [search, setSearch] = useState('');
     const [op, setOperacion] = useState(1);
 
     useEffect(() => {
         getClientes();
-    }, []);
+    }, [search]);
 
     const getClientes = async () => {
         try {
-            const response = await axios.get(url + "getAll");
+            const response = await axios.get(`${url}getAll`, {
+                params: { search }, 
+              });
             setClientes(response.data);
         } catch (error) {
             console.error("Error al obtener clientes:", error);
@@ -125,6 +129,13 @@ const AbrirClientes = () => {
                             </button>
                         </div>
                     </div>
+                </div>
+
+                <div className="row mt-3">
+                <div className="col-md-4 offset-md-4">
+                <input type="text" className="form-control" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)}>
+                </input>
+                </div>
                 </div>
 
                 <div className="row mt-3">
