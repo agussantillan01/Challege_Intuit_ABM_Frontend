@@ -113,6 +113,15 @@ const AbrirClientes = () => {
         }
     };
     
+
+    const Delete = async (id) => { 
+        try {
+            console.log("DESDE DELETE: ", id);
+            const response = await axios.post(`${url}Delete?id=${id}`);
+        } catch (error) {
+            throw error;  
+        }
+    };
     return (
         <div className="App">
             <div className="container-fluid">
@@ -166,6 +175,13 @@ const AbrirClientes = () => {
                                                     data-bs-target="#modalclientes"
                                                 >
                                                     <i className="fa-solid fa-edit"></i>
+                                                </button>
+
+                                                <button
+                                                onClick={() => Delete(cliente.id)}
+                                                    className="btn btn-remove"
+                                                >
+                                                    <i className="fa-solid fa-remove"></i>
                                                 </button>
                                             </td>
                                         </tr>
