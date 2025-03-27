@@ -83,6 +83,7 @@ const AbrirClientes = () => {
             } else { 
                 await Actualizar({ id, nombre, apellido, fechaNacimiento, cuit, domicilio, telefono, email });
             }
+            getClientes();
         } catch (error) {
             if (error.isAxiosError) {
                 const errorMessage = error.response ? error.response.data : error.message;
@@ -118,6 +119,7 @@ const AbrirClientes = () => {
         try {
             console.log("DESDE DELETE: ", id);
             const response = await axios.post(`${url}Delete?id=${id}`);
+            getClientes();
         } catch (error) {
             throw error;  
         }
